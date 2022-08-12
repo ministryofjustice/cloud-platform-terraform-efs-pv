@@ -1,16 +1,13 @@
-# cloud-platform-terraform-_template_
+# cloud-platform-terraform-efs-pv
 
-_note: Please remove all comments in italics and fill where required>_
+This terraform module will create an EFS filesystem bound to the VPC's private subnets.
 
-_Please change the urls in the release badge below_
-[![Releases](https://img.shields.io/github/release/ministryofjustice/cloud-platform-terraform-template/all.svg?style=flat-square)](https://github.com/ministryofjustice/cloud-platform-terraform-template/releases)
+It will next createa a filesystem access point using the [EFS CSI driver](https://github.com/ministryofjustice/cloud-platform-terraform-efs-csi) and a `StorageClass` in the cluster that can be used to mount the fs on multiple pods as `ReadWriteMany`.
 
-_Short describion of the module_
-_This Terraform module ......_
+Access security is handled via IAM, calling https://github.com/ministryofjustice/cloud-platform-terraform-irsa to create the required `ServiceAccount`.
 
 ## Usage
 
-_Describe how to use the module_
 See the [examples/](examples/) folder.
 
 <!--- BEGIN_TF_DOCS --->
@@ -63,4 +60,5 @@ Some of the inputs are tags. All infrastructure resources need to be tagged acco
 
 ## Reading Material
 
-_add link to external source_
+EFS CSI upstream: https://github.com/kubernetes-sigs/aws-efs-csi-driver
+EKS persistent storage HOWTO: https://aws.amazon.com/premiumsupport/knowledge-center/eks-persistent-storage/
