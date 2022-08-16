@@ -56,3 +56,8 @@ variable "uid_gid" {
   description = "numeric ID of file owner"
   default     = 1000
 }
+
+variable "capacity" {
+  description = "EFS doesn't really enforce any file system capacity, this is just a hint"
+  default = 2
+}

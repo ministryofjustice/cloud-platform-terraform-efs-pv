@@ -1,4 +1,4 @@
-resource "kubernetes_persistent_volume" "raz_vol" {
+resource "kubernetes_persistent_volume" "efs_vol" {
   metadata {
     name = "raz-vol"
   }
@@ -6,9 +6,9 @@ resource "kubernetes_persistent_volume" "raz_vol" {
     access_modes                     = ["ReadWriteMany"]
     volume_mode                      = "Filesystem"
     persistent_volume_reclaim_policy = "Retain"
-    storage_class_name               = "raz-efs"
+    storage_class_name               = "efs"
     capacity = {
-      storage = "2Gi"
+      storage = "${var.capacity}Gi"
     }
     persistent_volume_source {
       csi {
@@ -19,19 +19,19 @@ resource "kubernetes_persistent_volume" "raz_vol" {
   }
 }
 
-resource "kubernetes_persistent_volume_claim" "raz_claim" {
+resource "kubernetes_persistent_volume_claim" "efs_claim" {
   metadata {
-    name      = "raz-claim"
-    namespace = "raz-test-not-one"
+    name      = local.name
+    namespace = var.namespace
   }
   spec {
     access_modes       = ["ReadWriteMany"]
-    storage_class_name = "raz-efs"
+    storage_class_name = "efs"
     resources {
       requests = {
-        storage = "1Gi"
+        storage = "${var.capacity}Gi"
       }
     }
-    volume_name = kubernetes_persistent_volume.raz_vol.metadata.0.name
+    volume_name = kubernetes_persistent_volume.efs_vol.metadata.0.name
   }
 }
