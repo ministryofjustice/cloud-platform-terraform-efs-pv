@@ -40,7 +40,7 @@ variable "encrypted" {
 
 variable "transition_to_ia" {
   description = "how long it takes to transition files to the IA storage class"
-  default     = "AFTER_30_DAYSS"
+  default     = "AFTER_30_DAYS"
   validation {
     condition     = contains(["AFTER_7_DAYS", "AFTER_14_DAYS", "AFTER_30_DAYS", "AFTER_60_DAYS", "AFTER_90_DAYS"], var.transition_to_ia)
     error_message = "Valid transition to IA values: AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, or AFTER_90_DAYS."
