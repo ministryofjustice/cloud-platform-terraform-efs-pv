@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "irsa" {
 resource "aws_iam_policy" "irsa" {
   name        = "efs-${var.cluster_name}-${var.namespace}"
   path        = "/cloud-platform/"
-  policy      = data.aws_iam_policy_document.efs_doc.json
+  policy      = data.aws_iam_policy_document.irsa.json
   description = "Policy for EFS NFS client"
 }
 

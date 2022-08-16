@@ -31,11 +31,6 @@ resource "aws_efs_mount_target" "efs" {
   file_system_id  = aws_efs_file_system.efs.id
   subnet_id       = sort(data.aws_subnet_ids.private.ids)[count.index]
   security_groups = [module.efs_security_group.security_group_id]
-  tags = {
-    Terraform                                   = true
-    Name                                        = "${local.name}-efs"
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-  }
 }
 
 resource "aws_efs_access_point" "efs_ap" {
