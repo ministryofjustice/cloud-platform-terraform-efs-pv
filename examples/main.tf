@@ -6,4 +6,12 @@ provider "aws" {
 module "template" {
   source = "../"
 
+  cluster_name           = "example-cluster"
+  team_name              = "example-repo"
+  business-unit          = "example-bu"
+  application            = "example-app"
+  is-production          = "false"
+  namespace              = "example-ns"
+  environment-name       = "example-env"
+  infrastructure-support = "example-team"
 }
