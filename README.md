@@ -62,7 +62,7 @@ See the [examples/](examples/) folder.
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `any` | n/a | yes |
 | <a name="input_slack_channel"></a> [slack\_channel](#input\_slack\_channel) | Team slack channel to use if we need to contact your team | `any` | n/a | yes |
 | <a name="input_team_name"></a> [team\_name](#input\_team\_name) | The name of your development team | `any` | n/a | yes |
-| <a name="input_transition_to_ia"></a> [transition\_to\_ia](#input\_transition\_to\_ia) | how long it takes to transition files to the IA storage class | `string` | `"AFTER_30_DAYSS"` | no |
+| <a name="input_transition_to_ia"></a> [transition\_to\_ia](#input\_transition\_to\_ia) | how long it takes to transition files to the IA storage class | `string` | `"AFTER_30_DAYS"` | no |
 | <a name="input_transition_to_primary_storage_class"></a> [transition\_to\_primary\_storage\_class](#input\_transition\_to\_primary\_storage\_class) | transition a file from infequent access storage to primary storage | `string` | `"AFTER_1_ACCESS"` | no |
 | <a name="input_uid_gid"></a> [uid\_gid](#input\_uid\_gid) | numeric ID of file owner | `number` | `1000` | no |
 
