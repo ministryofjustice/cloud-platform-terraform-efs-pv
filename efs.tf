@@ -51,7 +51,7 @@ resource "aws_efs_access_point" "efs_ap" {
   }
   tags = {
     Terraform                                   = true
-    Name                                        = "${local.name}-efs"
+    Name                                        = local.name
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }
 }
