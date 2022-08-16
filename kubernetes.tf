@@ -10,6 +10,7 @@ resource "kubernetes_storage_class" "efs" {
     fileSystemId     = aws_efs_file_system.efs.id
     directoryPerms   = 750
   }
+  depends_on = [aws_efs_mount_target.efs]
 }
 
 resource "kubernetes_persistent_volume" "efs_vol" {
@@ -20,7 +21,7 @@ resource "kubernetes_persistent_volume" "efs_vol" {
     access_modes                     = ["ReadWriteMany"]
     volume_mode                      = "Filesystem"
     persistent_volume_reclaim_policy = "Retain"
-    storage_class_name               = kubernetes_storage_class.efs.name
+    storage_class_name               = "${local.name}-efs"
     capacity = {
       storage = "${var.capacity}Gi"
     }
@@ -31,6 +32,7 @@ resource "kubernetes_persistent_volume" "efs_vol" {
       }
     }
   }
+  depends_on = [kubernetes_storage_class.efs]
 }
 
 resource "kubernetes_persistent_volume_claim" "efs_claim" {
@@ -40,7 +42,7 @@ resource "kubernetes_persistent_volume_claim" "efs_claim" {
   }
   spec {
     access_modes       = ["ReadWriteMany"]
-    storage_class_name = kubernetes_storage_class.efs.name
+    storage_class_name = "${local.name}-efs"
     resources {
       requests = {
         storage = "${var.capacity}Gi"
@@ -48,4 +50,5 @@ resource "kubernetes_persistent_volume_claim" "efs_claim" {
     }
     volume_name = kubernetes_persistent_volume.efs_vol.metadata.0.name
   }
+  depends_on = [kubernetes_persistent_volume.efs_vol]
 }
