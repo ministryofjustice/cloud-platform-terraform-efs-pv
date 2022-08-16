@@ -20,7 +20,7 @@ resource "kubernetes_persistent_volume" "efs_vol" {
     access_modes                     = ["ReadWriteMany"]
     volume_mode                      = "Filesystem"
     persistent_volume_reclaim_policy = "Retain"
-    storage_class_name               = kubernetes_storage_class.efs.metadata.name
+    storage_class_name               = kubernetes_storage_class.efs.name
     capacity = {
       storage = "${var.capacity}Gi"
     }
@@ -40,7 +40,7 @@ resource "kubernetes_persistent_volume_claim" "efs_claim" {
   }
   spec {
     access_modes       = ["ReadWriteMany"]
-    storage_class_name = kubernetes_storage_class.efs.metadata.name
+    storage_class_name = kubernetes_storage_class.efs.name
     resources {
       requests = {
         storage = "${var.capacity}Gi"
