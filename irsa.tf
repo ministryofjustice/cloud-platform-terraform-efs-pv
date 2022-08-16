@@ -23,5 +23,5 @@ module "efs_sa" {
   eks_cluster      = var.cluster_name
   namespace        = var.namespace
   service_account  = "efs-sa"
-  role_policy_arns = [aws_iam_policy.efs_policy.arn]
+  role_policy_arns = [aws_iam_policy.irsa.arn]
 }
