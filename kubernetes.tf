@@ -1,3 +1,17 @@
+
+resource "kubernetes_storage_class" "efs" {
+  metadata {
+    name = "${local.name}-efs"
+  }
+  storage_provisioner = "efs.csi.aws.com"
+  reclaim_policy      = "Retain"
+  parameters = {
+    provisioningMode = "efs-ap"
+    fileSystemId     = aws_efs_file_system.efs.id
+    directoryPerms   = 750
+  }
+}
+
 resource "kubernetes_persistent_volume" "efs_vol" {
   metadata {
     name = "raz-vol"
@@ -6,7 +20,7 @@ resource "kubernetes_persistent_volume" "efs_vol" {
     access_modes                     = ["ReadWriteMany"]
     volume_mode                      = "Filesystem"
     persistent_volume_reclaim_policy = "Retain"
-    storage_class_name               = "efs"
+    storage_class_name               = kubernetes_storage_class.efs.metadata.name
     capacity = {
       storage = "${var.capacity}Gi"
     }
@@ -26,7 +40,7 @@ resource "kubernetes_persistent_volume_claim" "efs_claim" {
   }
   spec {
     access_modes       = ["ReadWriteMany"]
-    storage_class_name = "efs"
+    storage_class_name = kubernetes_storage_class.efs.metadata.name
     resources {
       requests = {
         storage = "${var.capacity}Gi"
