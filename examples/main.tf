@@ -12,6 +12,7 @@ module "template" {
   application            = "example-app"
   is_production          = "false"
   namespace              = "example-ns"
-  environment_name       = "example-env"
+  environment            = "example-env"
   infrastructure_support = "example-team"
+  slack_channel          = "#example-channel"
 }
