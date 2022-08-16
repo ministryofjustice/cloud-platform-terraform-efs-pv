@@ -59,5 +59,5 @@ variable "uid_gid" {
 
 variable "capacity" {
   description = "EFS doesn't really enforce any file system capacity, this is just a hint"
-  default = 2
+  default     = 2
 }
