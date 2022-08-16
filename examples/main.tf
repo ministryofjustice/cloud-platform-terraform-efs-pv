@@ -8,10 +8,10 @@ module "template" {
 
   cluster_name           = "example-cluster"
   team_name              = "example-repo"
-  business-unit          = "example-bu"
+  business_unit          = "example-bu"
   application            = "example-app"
-  is-production          = "false"
+  is_production          = "false"
   namespace              = "example-ns"
-  environment-name       = "example-env"
-  infrastructure-support = "example-team"
+  environment_name       = "example-env"
+  infrastructure_support = "example-team"
 }
