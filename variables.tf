@@ -43,7 +43,7 @@ variable "transition_to_ia" {
   default     = "AFTER_30_DAYSS"
   validation {
     condition     = contains(["AFTER_7_DAYS", "AFTER_14_DAYS", "AFTER_30_DAYS", "AFTER_60_DAYS", "AFTER_90_DAYS"], var.transition_to_ia)
-    error_message = "Valid transition to IA values: AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, or AFTER_90_DAYS"
+    error_message = "Valid transition to IA values: AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, or AFTER_90_DAYS."
   }
 }
 
