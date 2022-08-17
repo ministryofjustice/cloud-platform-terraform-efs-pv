@@ -2,6 +2,9 @@
 resource "kubernetes_storage_class" "efs" {
   metadata {
     name = "${local.name}-efs"
+    labels = {
+      "velero.io/exclude-from-backup" = "true"
+    }
   }
   storage_provisioner = "efs.csi.aws.com"
   reclaim_policy      = "Retain"
