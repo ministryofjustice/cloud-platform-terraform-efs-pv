@@ -15,7 +15,10 @@ resource "kubernetes_storage_class" "efs" {
 
 resource "kubernetes_persistent_volume" "efs_vol" {
   metadata {
-    name = "raz-vol"
+    name = "${local.name}-efs"
+    labels = {
+      "velero.io/exclude-from-backup" = "true"
+    }
   }
   spec {
     access_modes                     = ["ReadWriteMany"]
