@@ -3,16 +3,28 @@ provider "aws" {
   profile = "moj-cp"
 }
 
-module "template" {
+module "efs" {
+  # check latest release
+  # source = "github.com/ministryofjustice/cloud-platform-terraform-efs-pv?ref=1.0"
   source = "../"
 
-  cluster_name           = "example-cluster"
-  team_name              = "example-repo"
-  business_unit          = "example-bu"
-  application            = "example-app"
-  is_production          = "false"
-  namespace              = "example-ns"
-  environment            = "example-env"
-  infrastructure_support = "example-team"
-  slack_channel          = "#example-channel"
+  cluster_name           = var.cluster_name == "live-1" ? "live" : var.cluster_name
+  namespace              = var.namespace
+  application            = var.application
+  business_unit          = var.business_unit
+  environment            = var.environment
+  infrastructure_support = var.infrastructure_support
+  is_production          = var.is_production
+  team_name              = var.team_name
+  slack_channel          = var.slack_channel
+}
+
+resource "kubernetes_secret" "efs_id" {
+  metadata {
+    name      = "efs-id"
+    namespace = var.namespace
+  }
+  data = {
+    efs-id = module.efs.efs_id
+  }
 }
