@@ -20,7 +20,7 @@ resource "aws_iam_policy" "irsa" {
 module "efs_sa" {
   source = "github.com/ministryofjustice/cloud-platform-terraform-irsa?ref=1.0.3"
 
-  eks_cluster      = var.cluster_name
+  eks_cluster      = var.cluster_name == "live-1" ? "live" : var.cluster_name
   namespace        = var.namespace
   service_account  = "efs-sa"
   role_policy_arns = [aws_iam_policy.irsa.arn]
