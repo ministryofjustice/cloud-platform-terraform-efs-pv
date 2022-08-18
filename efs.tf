@@ -55,3 +55,32 @@ resource "aws_efs_access_point" "efs_ap" {
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }
 }
+
+resource "aws_efs_file_system_policy" "policy" {
+  file_system_id = aws_efs_file_system.efs.id
+
+  policy = <<POLICY
+{
+    "Version": "2012-10-17",
+    "Id": "allow-only-sa",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "${module.efs_sa.aws_iam_role_arn}"
+            },
+            "Resource": "${aws_efs_file_system.efs.arn}",
+            "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "true"
+                }
+            }
+        }
+    ]
+}
+POLICY
+}
