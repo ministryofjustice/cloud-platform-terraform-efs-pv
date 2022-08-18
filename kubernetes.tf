@@ -45,6 +45,9 @@ resource "kubernetes_persistent_volume_claim" "efs_claim" {
   metadata {
     name      = local.name
     namespace = var.namespace
+    labels = {
+      "velero.io/exclude-from-backup" = "true"
+    }
   }
   spec {
     access_modes       = ["ReadWriteMany"]
