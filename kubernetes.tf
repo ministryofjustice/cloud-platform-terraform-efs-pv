@@ -35,9 +35,9 @@ resource "kubernetes_persistent_volume" "efs_vol" {
       csi {
         driver        = "efs.csi.aws.com"
         volume_handle = "${aws_efs_file_system.efs.id}::${aws_efs_access_point.efs_ap.id}"
-        volume_attributes = {
-          podIAMAuthorization = true
-        }
+#        volume_attributes = {
+#          podIAMAuthorization = true
+#        }
       }
     }
   }
