@@ -61,3 +61,13 @@ variable "capacity" {
   description = "EFS doesn't really enforce any file system capacity, this is just a hint"
   default     = 2
 }
+
+variable "velero_skip" {
+  description = "Set false to include in Velero schedule"
+  default     = "true"
+}
+
+variable "reclaim_policy" {
+  description = "Retain / Delete filesystem after PVC gone"
+  default     = "Delete"
+}
