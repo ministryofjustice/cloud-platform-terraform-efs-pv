@@ -63,11 +63,13 @@ See the [examples/](examples/) folder.
 | <a name="input_infrastructure_support"></a> [infrastructure\_support](#input\_infrastructure\_support) | The team responsible for managing the infrastructure. Should be of the form team-email. | `any` | n/a | yes |
 | <a name="input_is_production"></a> [is\_production](#input\_is\_production) | n/a | `string` | `"false"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `any` | n/a | yes |
+| <a name="input_reclaim_policy"></a> [reclaim\_policy](#input\_reclaim\_policy) | Retain / Delete filesystem after PVC gone | `string` | `"Delete"` | no |
 | <a name="input_slack_channel"></a> [slack\_channel](#input\_slack\_channel) | Team slack channel to use if we need to contact your team | `any` | n/a | yes |
 | <a name="input_team_name"></a> [team\_name](#input\_team\_name) | The name of your development team | `any` | n/a | yes |
 | <a name="input_transition_to_ia"></a> [transition\_to\_ia](#input\_transition\_to\_ia) | how long it takes to transition files to the IA storage class | `string` | `"AFTER_30_DAYS"` | no |
 | <a name="input_transition_to_primary_storage_class"></a> [transition\_to\_primary\_storage\_class](#input\_transition\_to\_primary\_storage\_class) | transition a file from infequent access storage to primary storage | `string` | `"AFTER_1_ACCESS"` | no |
 | <a name="input_uid_gid"></a> [uid\_gid](#input\_uid\_gid) | numeric ID of file owner | `number` | `1000` | no |
+| <a name="input_velero_skip"></a> [velero\_skip](#input\_velero\_skip) | Set false to include in Velero schedule | `string` | `"true"` | no |
 
 ## Outputs
 
