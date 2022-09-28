@@ -3,7 +3,7 @@ resource "kubernetes_storage_class" "efs" {
   metadata {
     name = "${local.name}-efs"
     labels = {
-      "velero.io/exclude-from-backup" = "${var.velero_skip}"
+      "velero.io/exclude-from-backup" = var.velero_skip
     }
   }
   storage_provisioner = "efs.csi.aws.com"
@@ -20,7 +20,7 @@ resource "kubernetes_persistent_volume" "efs_vol" {
   metadata {
     name = "${local.name}-efs"
     labels = {
-      "velero.io/exclude-from-backup" = "${var.velero_skip}"
+      "velero.io/exclude-from-backup" = var.velero_skip
     }
   }
   spec {
@@ -35,9 +35,9 @@ resource "kubernetes_persistent_volume" "efs_vol" {
       csi {
         driver        = "efs.csi.aws.com"
         volume_handle = "${aws_efs_file_system.efs.id}::${aws_efs_access_point.efs_ap.id}"
-#        volume_attributes = {
-#          podIAMAuthorization = true
-#        }
+        volume_attributes = {
+          podIAMAuthorization = true
+        }
       }
     }
   }
@@ -49,7 +49,7 @@ resource "kubernetes_persistent_volume_claim" "efs_claim" {
     name      = local.name
     namespace = var.namespace
     labels = {
-      "velero.io/exclude-from-backup" = "${var.velero_skip}"
+      "velero.io/exclude-from-backup" = var.velero_skip
     }
   }
   spec {
